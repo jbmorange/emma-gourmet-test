@@ -1,0 +1,763 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Emma Gourmet, cuisine gastronomique de saison et grands classiques africains revisités. Version de test.">
+<title>Emma Gourmet · Site test</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=DM+Sans:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  color-scheme: dark;
+  --bg:#1A1D21; --surface:#22262B; --card:#2A2F35; --card-2:#30353C; --line:#3A4048; --line-2:#4A515A;
+  --text:#E8E6E3; --text-strong:#F4F2EF; --muted:#A7ADB4; --faint:#8A929B;
+  --steel:#3A4149; --steel-hover:#454D56;
+  --btn:#7E6358; --btn-hover:#8C7063; --on-btn:#F7F5F2;
+  --copper:#C98A62; --copper-soft:#3A2E27; --copper-text:#E0B394;
+  --ok:#9FB7A0; --err:#E4A08A;
+  --footer:#111316;
+  --serif:'Fraunces', Georgia, 'Times New Roman', serif;
+  --sans:'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --r:18px;
+}
+*{box-sizing:border-box}
+html,body{background:var(--bg)}
+body{margin:0;font-family:var(--sans);font-size:16px;line-height:1.5;color:var(--text);-webkit-font-smoothing:antialiased}
+a{color:var(--copper);text-decoration:none}
+a:hover{color:#E0A57F}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--copper);outline-offset:2px;border-radius:6px}
+h1,h2,h3{font-family:var(--serif);font-weight:600;color:var(--text-strong);margin:0;text-wrap:balance;line-height:1.1}
+p{margin:0}
+.wrap{max-width:1200px;margin:0 auto;padding-inline:24px}
+.muted{color:var(--muted)}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--copper)}
+.num{font-variant-numeric:tabular-nums}
+
+/* demo banner */
+.demo{background:var(--copper-soft);color:var(--copper-text);font-size:13px;text-align:center;padding:8px 16px}
+
+/* header */
+.hdr{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(26,29,33,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--card)}
+.hdr .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:72px}
+.brand{display:flex;align-items:center;gap:12px;color:var(--text)}
+.brand:hover{color:var(--text)}
+.mark{width:42px;height:42px;border-radius:999px;background:var(--steel);display:grid;place-items:center;font-family:var(--serif);font-weight:700;font-size:21px;color:var(--text-strong);flex-shrink:0}
+.brand b{display:block;font-family:var(--serif);font-weight:600;font-size:21px;line-height:1.1}
+.brand small{display:block;font-size:12px;color:var(--muted)}
+.nav{display:flex;gap:28px}
+.nav a{color:var(--text);font-weight:500;font-size:15px}
+.nav a:hover,.nav a[aria-current="page"]{color:var(--copper)}
+.nav a[aria-current="page"]{font-weight:700}
+.hdr-actions{display:flex;gap:10px;align-items:center}
+.cart-btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--text);font-size:14px;font-weight:600;cursor:pointer}
+.cart-btn:hover{border-color:var(--copper);color:var(--text)}
+.badge{min-width:22px;height:22px;padding:0 7px;border-radius:999px;background:var(--btn);color:var(--on-btn);font-size:12px;font-weight:700;display:inline-grid;place-items:center}
+.badge.zero{background:var(--steel)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 24px;border-radius:999px;border:0;background:var(--btn);color:var(--on-btn);font-weight:600;font-size:15px;cursor:pointer;text-align:center;transition:background .15s}
+.btn:hover{background:var(--btn-hover);color:var(--on-btn)}
+.btn.ghost{background:transparent;border:1px solid #6B737D;color:var(--text)}
+.btn.ghost:hover{background:var(--card)}
+.btn.steel{background:var(--steel);color:var(--text-strong)}
+.btn.steel:hover{background:var(--steel-hover)}
+.btn.sm{min-height:40px;padding:0 16px;font-size:14px}
+.btn.block{width:100%}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+
+/* sections */
+section{padding-block:64px}
+.alt{background:var(--surface)}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+.sec-head h2{font-size:clamp(28px,4vw,38px);margin-top:6px}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:56px;align-items:center;padding-block:56px 72px}
+.hero h1{font-size:clamp(40px,6vw,66px);line-height:1.03;margin-top:18px}
+.hero .lead{font-size:18px;color:var(--muted);max-width:52ch;margin-top:20px}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.facts{display:flex;gap:36px;flex-wrap:wrap;margin-top:32px}
+.facts b{display:block;font-family:var(--serif);font-weight:600;font-size:26px;color:var(--copper)}
+.facts span{font-size:13px;color:var(--muted)}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:999px;background:#353B42;color:#D5D8DC;font-size:12px;font-weight:600;white-space:nowrap}
+.chip.copper{background:var(--copper-soft);color:var(--copper-text)}
+
+/* plate illustration (stand-in for photos) */
+.plate{position:relative;border-radius:var(--r);overflow:hidden;background:
+  radial-gradient(circle at 50% 50%, var(--food,#7E6358) 0 20%, transparent 21%),
+  radial-gradient(circle at 50% 50%, rgba(255,255,255,.07) 0 33%, rgba(255,255,255,.12) 33.5% 35%, transparent 35.5%),
+  radial-gradient(circle at 30% 20%, #343a41, #25292e 70%);aspect-ratio:4/3;max-width:100%}
+.plate::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 46% 44%, rgba(255,255,255,.14) 0 6%, transparent 7%)}
+.plate .ph-label{position:absolute;left:12px;bottom:12px;font-size:11px;font-weight:600;color:var(--faint);background:rgba(17,19,22,.7);padding:4px 10px;border-radius:999px;z-index:1}
+.hero .plate{aspect-ratio:1/1;border-radius:28px}
+
+/* service cards */
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.svc{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:26px;display:flex;flex-direction:column;gap:12px}
+.svc h3{font-size:22px}
+.svc .ic{width:46px;height:46px;border-radius:14px;background:var(--steel);display:grid;place-items:center;color:var(--text-strong)}
+.svc .ic.cu{background:var(--btn)}
+.svc p{color:var(--muted);font-size:15px}
+.svc a,.svc button.link{margin-top:auto;font-weight:600;font-size:15px}
+button.link{background:none;border:0;padding:0;color:var(--copper);cursor:pointer;text-align:left}
+button.link:hover{color:#E0A57F}
+
+/* dish cards */
+.dishes{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:22px}
+.dish{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
+.dish .plate{border-radius:0}
+.dish-open{display:block;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-align:left}
+.dish-open:hover h3{color:var(--copper)}
+.dish-body{display:flex;flex-direction:column;gap:8px;padding:16px 18px 18px;flex-grow:1}
+.dish-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.dish h3{font-size:19px;transition:color .15s}
+.price{color:var(--copper);font-weight:700;white-space:nowrap}
+.dish p{font-size:14px;color:var(--muted)}
+.dish-foot{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:auto;padding-top:6px}
+
+/* steps */
+.steps-sec{background:var(--card-2)}
+.steps{display:grid;grid-template-columns:minmax(0,1fr) repeat(3,minmax(0,1fr));gap:20px;align-items:center}
+.step{background:var(--card);border-radius:var(--r);padding:22px;display:flex;flex-direction:column;gap:8px}
+.step .n{width:34px;height:34px;border-radius:999px;background:var(--btn);color:var(--on-btn);display:grid;place-items:center;font-weight:700}
+.step h3{font-size:19px}
+.step p{font-size:14px;color:#C5CAD0}
+
+/* carte */
+.page-head{padding-block:48px 20px}
+.page-head h1{font-size:clamp(34px,5vw,50px)}
+.page-head p{color:var(--muted);max-width:62ch;margin-top:12px}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.filter{min-height:40px;padding:0 16px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--text);font-size:14px;font-weight:600;cursor:pointer}
+.filter:hover{border-color:var(--line-2)}
+.filter[aria-pressed="true"]{background:var(--text);color:var(--bg);border-color:var(--text)}
+.carte-layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:32px;align-items:start;padding-block:12px 72px}
+.cat-title{font-size:26px;margin:8px 0 16px}
+.cat-block+.cat-block{margin-top:36px}
+.side{position:sticky;top:calc(env(safe-area-inset-top,0px) + 92px)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:14px}
+.panel h2{font-size:22px}
+.row{display:flex;justify-content:space-between;gap:12px;font-size:15px}
+.row.total{font-size:19px;font-weight:700}
+.hr{height:1px;background:var(--line)}
+.empty{color:var(--muted);font-size:14px}
+.tasting{background:linear-gradient(0deg,var(--card),var(--card));border:1px dashed var(--line-2);border-radius:var(--r);padding:24px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.tasting h3{font-size:22px}
+
+/* segmented + options */
+.seg{display:flex;gap:4px;padding:4px;border-radius:999px;background:var(--surface)}
+.seg button{flex:1;min-height:40px;border:0;border-radius:999px;background:transparent;color:var(--muted);font-size:14px;font-weight:600;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--steel);color:var(--text-strong)}
+.opts{display:flex;gap:10px;flex-wrap:wrap}
+.opt{flex:1 1 140px;min-height:58px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:2px;padding:10px 16px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--text);cursor:pointer;text-align:left}
+.opt:hover{border-color:var(--line-2)}
+.opt[aria-pressed="true"]{border:2px solid var(--copper);background:var(--copper-soft);padding:9px 15px}
+.opt b{font-size:15px;font-weight:600}
+.opt small{font-size:13px;color:var(--muted)}
+
+/* detail */
+.crumbs{display:flex;gap:8px;flex-wrap:wrap;font-size:14px;color:var(--muted);padding-top:24px}
+.crumbs a{color:var(--muted)}
+.crumbs a:hover{color:var(--text)}
+.detail{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;padding-block:24px 56px}
+.detail .plate{aspect-ratio:5/4;border-radius:24px}
+.thumbs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:12px}
+.thumbs .plate{aspect-ratio:1/1;border-radius:12px}
+.info{display:flex;flex-direction:column;gap:20px}
+.info h1{font-size:clamp(32px,4.5vw,46px)}
+.info .big-price{font-size:24px;font-weight:700;color:var(--copper);margin-top:8px}
+.info .desc{color:var(--muted);line-height:1.65}
+.opt-group{display:flex;flex-direction:column;gap:10px}
+.opt-group>span{font-size:15px;font-weight:700}
+.add-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.add-row .btn{flex:1 1 220px}
+.qty{display:inline-flex;align-items:center;gap:12px;padding:5px;border-radius:999px;border:1px solid var(--line);background:var(--surface)}
+.qty button{width:36px;height:36px;border-radius:999px;border:0;background:#353B42;color:var(--text);font-size:18px;font-weight:700;cursor:pointer;display:grid;place-items:center}
+.qty button:hover{background:var(--steel-hover)}
+.qty span{min-width:18px;text-align:center;font-weight:700}
+
+/* cart */
+.flow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;list-style:none;margin:0;padding:0;font-size:14px}
+.flow li{display:flex;align-items:center;gap:8px;color:var(--muted)}
+.flow .dot{width:28px;height:28px;border-radius:999px;border:1px solid var(--line);display:grid;place-items:center;font-size:13px;font-weight:700}
+.flow li.done,.flow li.cur{color:var(--text)}
+.flow li.done .dot,.flow li.cur .dot{background:var(--btn);border-color:var(--btn);color:var(--on-btn)}
+.flow li.cur{font-weight:700}
+.flow .bar{width:40px;height:2px;background:var(--line)}
+.flow .bar.done{background:var(--btn)}
+.two-col{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:28px;align-items:start;padding-block:20px 72px}
+.stack{display:flex;flex-direction:column;gap:16px}
+.line{display:grid;grid-template-columns:84px minmax(0,1fr) auto auto;gap:18px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px}
+.line .plate{aspect-ratio:1/1;border-radius:12px}
+.line h3{font-size:19px}
+.line small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+.line .rm{font-size:13px;font-weight:600;margin-top:4px}
+.line .amt{min-width:80px;text-align:right;font-weight:700}
+.upsell{background:var(--surface);border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:12px}
+.upsell h3{font-size:19px}
+.pill{min-height:40px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--text);font-size:14px;font-weight:600;cursor:pointer}
+.pill:hover{border-color:var(--copper)}
+.pill span{color:var(--muted);font-weight:500;margin-left:6px}
+.pill[aria-pressed="true"]{background:var(--text);color:var(--bg);border-color:var(--text)}
+
+/* forms */
+.field{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;flex:1 1 200px}
+.field input,.field select,.field textarea{min-height:48px;padding:0 14px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--text);font-size:15px;font-weight:400;width:100%}
+.field textarea{padding:12px 14px;min-height:88px;resize:vertical}
+.field input::placeholder,.field textarea::placeholder{color:var(--faint)}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--copper);outline:none}
+.field .err{color:var(--err);font-weight:500;font-size:12px;min-height:0}
+.fields{display:flex;gap:14px;flex-wrap:wrap}
+.note{font-size:13px;color:var(--muted);background:var(--surface);border-radius:12px;padding:12px 14px}
+.form-error{color:var(--err);font-size:14px}
+
+/* tracking */
+.done-head{text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px;padding-block:48px 16px}
+.done-head .ok{width:70px;height:70px;border-radius:999px;background:var(--steel);display:grid;place-items:center}
+.done-head h1{font-size:clamp(28px,4.4vw,40px)}
+.track{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.track li{display:flex;flex-direction:column;gap:6px}
+.track .tl{display:flex;align-items:center;gap:8px}
+.track .d{width:18px;height:18px;border-radius:999px;border:2px solid var(--line-2);flex-shrink:0;transition:background .4s,border-color .4s,box-shadow .4s}
+.track .ln{flex-grow:1;height:4px;border-radius:2px;background:var(--line);transition:background .4s}
+.track li.done .d{background:var(--copper);border-color:var(--copper)}
+.track li.done .ln{background:var(--copper)}
+.track li.cur .d{background:var(--copper);border-color:var(--copper);box-shadow:0 0 0 5px var(--copper-soft)}
+.track b{font-size:15px}
+.track li:not(.done):not(.cur) b{color:var(--muted)}
+.track small{font-size:13px;color:var(--muted)}
+.map{position:relative;border-radius:20px;overflow:hidden;background:#202428}
+.map svg{display:block;width:100%;height:auto}
+.eta{position:absolute;left:16px;top:16px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 16px}
+.eta small{display:block;color:var(--muted);font-size:13px}
+.eta b{font-family:var(--serif);font-size:22px;font-weight:600}
+
+/* reservation */
+.resa{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;padding-block:24px 72px;align-items:start}
+.resa .aside{display:flex;flex-direction:column;gap:18px}
+.hours{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:15px}
+.hours dt{color:var(--muted)}
+.hours dd{margin:0}
+.confirm{background:var(--copper-soft);border:1px solid #5A4538;border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:8px}
+.confirm h3{font-size:22px}
+
+/* footer */
+footer{background:var(--footer);padding-block:48px;margin-top:0}
+footer .wrap{display:grid;grid-template-columns:1.4fr repeat(3,minmax(0,1fr));gap:28px}
+footer h4{margin:0 0 10px;font-size:14px;color:var(--copper)}
+footer ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+footer a{color:var(--muted);font-size:14px}
+footer a:hover{color:var(--text)}
+footer .brand-f b{font-family:var(--serif);font-size:24px;font-weight:600}
+footer .brand-f p{color:var(--muted);font-size:14px;margin-top:8px;line-height:1.6}
+
+/* toast */
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--text);color:var(--bg);padding:12px 18px;border-radius:999px;font-weight:600;font-size:14px;box-shadow:0 10px 30px rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:40;max-width:calc(100% - 32px)}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* mobile nav */
+.menu-toggle{display:none;min-height:44px;min-width:44px;border-radius:999px;border:1px solid var(--line);background:var(--card);cursor:pointer}
+.hdr .mobile-nav{display:none;border-top:1px solid var(--card);padding-block:10px 14px;min-height:0}
+.ph-no{color:var(--copper-text);font-weight:700;letter-spacing:.02em}
+.line .ph-txt,.thumbs .ph-txt{display:none}
+.line .ph-label,.thumbs .ph-label{left:6px;bottom:6px;padding:2px 7px;font-size:10px}
+.mobile-nav a{display:block;padding:10px 0;color:var(--text);font-weight:500}
+
+@media (max-width: 980px){
+  .hero,.detail,.resa{grid-template-columns:1fr;gap:32px}
+  .carte-layout,.two-col{grid-template-columns:1fr}
+  .side{position:static}
+  .steps{grid-template-columns:1fr 1fr}
+  .steps>div:first-child{grid-column:1/-1}
+  footer .wrap{grid-template-columns:1fr 1fr}
+}
+@media (max-width: 760px){
+  .nav{display:none}
+  .menu-toggle{display:grid;place-items:center}
+  .hdr .mobile-nav.open{display:block}
+  .brand small{display:none}
+  .hdr-actions .btn{display:none}
+  .grid3{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  section{padding-block:48px}
+  .line{grid-template-columns:64px minmax(0,1fr);row-gap:12px}
+  .line .qty{grid-column:1/2}
+  .line .amt{text-align:right}
+  .track{grid-template-columns:1fr 1fr;row-gap:18px}
+}
+@media (max-width: 440px){
+  .wrap{padding-inline:16px}
+  footer .wrap{grid-template-columns:1fr}
+  .hero .ctas .btn{flex:1 1 100%}
+}
+@media (prefers-reduced-motion: reduce){
+  *{transition:none!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+<div class="demo" role="note">Démo en cours de construction · les commandes et réservations sont fictives</div>
+
+<header class="hdr">
+  <div class="wrap">
+    <a class="brand" href="#accueil" aria-label="Emma Gourmet, accueil">
+      <span class="mark" aria-hidden="true">E</span>
+      <span><b>Emma Gourmet</b><small>Cuisine gastronomique · saveurs d’Afrique revisitées</small></span>
+    </a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="#accueil" data-nav="accueil">Accueil</a>
+      <a href="#carte" data-nav="carte">La carte</a>
+      <a href="#reserver" data-nav="reserver">Réserver</a>
+      <a href="#contact" data-nav="contact">Contact</a>
+    </nav>
+    <div class="hdr-actions">
+      <a class="cart-btn" href="#panier" aria-label="Voir le panier">Panier <span class="badge num" id="cartCount">0</span></a>
+      <a class="btn sm steel" href="#carte">Commander</a>
+      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Ouvrir le menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="wrap mobile-nav" id="mobileNav">
+    <a href="#accueil">Accueil</a><a href="#carte">La carte</a><a href="#reserver">Réserver une table</a><a href="#panier">Panier</a><a href="#contact">Contact</a>
+  </div>
+</header>
+
+<main id="app" tabindex="-1"></main>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="brand-f">
+      <b>Emma Gourmet</b>
+      <p>[ADRESSE]<br>[TÉLÉPHONE] · [E-MAIL]<br>Du mardi au samedi · 12h–14h et 19h–22h</p>
+    </div>
+    <div><h4>Commander</h4><ul><li><a href="#carte">La carte</a></li><li><a href="#carte">Livraison</a></li><li><a href="#carte">À emporter</a></li></ul></div>
+    <div><h4>Le restaurant</h4><ul><li><a href="#reserver">Réserver une table</a></li><li><a href="#carte-degustation">Menu dégustation</a></li><li><a href="#accueil">Notre cuisine</a></li></ul></div>
+    <div><h4>Suivez-nous</h4><ul><li><a href="#contact">Instagram</a></li><li><a href="#contact">Facebook</a></li></ul></div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+'use strict';
+
+/* ---------- Données de la carte (exemples) ---------- */
+var CATS = [
+  {id:'entrees', label:'Entrées'},
+  {id:'plats', label:'Plats'},
+  {id:'desserts', label:'Desserts'},
+  {id:'boissons', label:'Boissons'}
+];
+var MENU = [
+  {id:'veloute', cat:'entrees', name:'Velouté de patate douce', tag:'Saison', afr:false, price:14, food:'#A8683A',
+   short:'Patate douce rôtie, huile pimentée, graines torréfiées.',
+   desc:'Patate douce rôtie au four puis mixée avec un bouillon de légumes, relevée d’une huile au piment doux et de graines de courge torréfiées.',
+   allergens:'Lait.'},
+  {id:'pastels', cat:'entrees', name:'Pastels de thon', tag:'Sénégal revisité', afr:true, price:15, food:'#A88A55',
+   short:'Chaussons croustillants, émulsion citron-gingembre.',
+   desc:'Les pastels, beignets de rue de Dakar, en version fine et croustillante : farce de thon au persil et au piment, émulsion citron-gingembre.',
+   allergens:'Gluten, poisson, œuf.'},
+  {id:'tartare', cat:'entrees', name:'Tartare de daurade', tag:'Signature', afr:false, price:17, food:'#C4B290',
+   short:'Mangue verte, citron vert, huile de sésame.',
+   desc:'Daurade taillée au couteau, mangue verte, citron vert, coriandre et quelques gouttes d’huile de sésame toasté.',
+   allergens:'Poisson, sésame.'},
+  {id:'ndole', cat:'plats', name:'Ndolé de homard bleu', tag:'Cameroun revisité', afr:true, price:36, food:'#556340', star:true,
+   short:'Feuilles de ndolé crémées, homard bleu rôti, plantain croustillant.',
+   desc:'Le ndolé, plat de fête camerounais, réinterprété : feuilles de ndolé crémées aux arachides torréfiées, demi-homard bleu rôti au beurre demi-sel et plantain mûr en chips croustillantes.',
+   allergens:'Crustacés, arachides, lait.',
+   opts:[
+     {key:'portion', label:'Portion', choices:[['Demi-homard',0],['Homard entier',18]]},
+     {key:'acc', label:'Accompagnement', choices:[['Plantain croustillant',0],['Miondo',4],['Riz au citron vert',3]]},
+     {key:'piment', label:'Niveau de piment', choices:[['Doux',0],['Moyen',0],['Relevé au Penja',0]]}
+   ]},
+  {id:'yassa', cat:'plats', name:'Yassa de volaille fermière', tag:'Sénégal revisité', afr:true, price:28, food:'#A07A3E', star:true,
+   short:'Suprême fermier, oignons confits au citron, riz noir.',
+   desc:'Le yassa de Casamance, version gastronomique : suprême de volaille fermière mariné au citron et à la moutarde, oignons confits longuement, riz noir vénéré.',
+   allergens:'Moutarde.',
+   opts:[
+     {key:'acc', label:'Accompagnement', choices:[['Riz noir',0],['Attiéké',3]]}
+   ]},
+  {id:'mafe', cat:'plats', name:'Mafé de veau', tag:'Mali revisité', afr:true, price:34, food:'#7A4A2E', star:true,
+   short:'Quasi basse température, jus d’arachide torréfiée, légumes glacés.',
+   desc:'Quasi de veau cuit à basse température, nappé d’un jus de mafé aux arachides torréfiées, carottes et navets glacés.',
+   allergens:'Arachides, céleri.'},
+  {id:'pigeon', cat:'plats', name:'Pigeon au poivre de Penja', tag:'Cameroun revisité', afr:true, price:38, food:'#5E3A2E',
+   short:'Pigeon rôti sur coffre, sauce au poivre blanc de Penja.',
+   desc:'Pigeon rôti sur coffre et cuisses confites, sauce au poivre blanc de Penja, purée de macabo.',
+   allergens:'Lait, sulfites.'},
+  {id:'bar', cat:'plats', name:'Bar de ligne', tag:'Signature', afr:false, price:32, food:'#B3A88C', star:true,
+   short:'Beurre blanc gingembre-citronnelle, poireaux fondants.',
+   desc:'Filet de bar de ligne cuit sur peau, beurre blanc au gingembre et à la citronnelle, poireaux fondants.',
+   allergens:'Poisson, lait.'},
+  {id:'risotto', cat:'plats', name:'Risotto aux cèpes', tag:'Saison', afr:false, price:26, food:'#8C7458',
+   short:'Carnaroli, cèpes rôtis, parmesan affiné, jus corsé.',
+   desc:'Riz carnaroli, cèpes rôtis, parmesan affiné et jus de volaille corsé.',
+   allergens:'Lait.'},
+  {id:'chocolat', cat:'desserts', name:'Chocolat & bissap', tag:'Sénégal revisité', afr:true, price:14, food:'#4A2A22',
+   short:'Moelleux grand cru, sorbet hibiscus, tuile fine.',
+   desc:'Moelleux au chocolat grand cru, sorbet à la fleur d’hibiscus (bissap), tuile fine au grué de cacao.',
+   allergens:'Gluten, œuf, lait.'},
+  {id:'mangue', cat:'desserts', name:'Mangue rôtie', tag:'Signature', afr:false, price:13, food:'#C8963E',
+   short:'Rôtie au miel, espuma coco, crumble d’arachide.',
+   desc:'Mangue rôtie au miel, espuma à la noix de coco, crumble croquant à l’arachide.',
+   allergens:'Arachides, lait, gluten.'},
+  {id:'cocktail', cat:'boissons', name:'Cocktail bissap-gingembre', tag:'Sans alcool', afr:true, price:9, food:'#7A2638',
+   short:'Hibiscus infusé, gingembre frais, citron vert.',
+   desc:'Fleurs d’hibiscus infusées à froid, gingembre frais pressé, citron vert. Sans alcool.',
+   allergens:'—'},
+  {id:'gingembre', cat:'boissons', name:'Jus de gingembre maison', tag:'Sans alcool', afr:true, price:6, food:'#C9A55A',
+   short:'Gingembre frais, ananas, menthe.',
+   desc:'Jus de gingembre frais pressé, ananas et menthe.',
+   allergens:'—'},
+  {id:'vin', cat:'boissons', name:'Verre de vin blanc', tag:'Accord du sommelier', afr:false, price:11, food:'#D2C27E',
+   short:'Sélection du moment, en accord avec la carte.',
+   desc:'La sélection du sommelier, choisie pour accompagner les plats de la saison.',
+   allergens:'Sulfites.'}
+];
+var BY_ID = {}; MENU.forEach(function(d, i){ BY_ID[d.id] = d; d.imgNo = String(i + 1).padStart(2, '0'); });
+var FREE_DELIVERY = 50, DELIVERY_FEE = 6;
+
+/* ---------- État ---------- */
+var state = { cart: [], mode: 'livraison', filter: 'tout', sel: {}, qty: 1, order: null, resa: null };
+try {
+  var saved = JSON.parse(localStorage.getItem('emma-cart') || 'null');
+  if (saved && Array.isArray(saved.cart)) { state.cart = saved.cart.filter(function(l){ return BY_ID[l.id]; }); state.mode = saved.mode || 'livraison'; }
+} catch (e) {}
+if (!state.cart.length) {
+  state.cart = [
+    {id:'ndole', choice:{portion:0, acc:0, piment:0}, qty:1},
+    {id:'yassa', choice:{acc:0}, qty:1},
+    {id:'chocolat', choice:{}, qty:2}
+  ];
+}
+function save(){ try { localStorage.setItem('emma-cart', JSON.stringify({cart: state.cart, mode: state.mode})); } catch (e) {} }
+
+/* ---------- Utilitaires ---------- */
+function eur(n){ return n.toFixed(2).replace('.', ',') + ' €'; }
+function eurShort(n){ return (n % 1 ? n.toFixed(2).replace('.', ',') : String(n)) + ' €'; }
+function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]; }); }
+function unitPrice(d, choice){ var p = d.price; (d.opts || []).forEach(function(o){ var i = (choice && choice[o.key]) || 0; p += o.choices[i][1]; }); return p; }
+function choiceText(d, choice){ return (d.opts || []).map(function(o){ return o.choices[(choice && choice[o.key]) || 0][0]; }).join(' · '); }
+function defaultChoice(d){ var c = {}; (d.opts || []).forEach(function(o){ c[o.key] = 0; }); return c; }
+function sameChoice(a, b){ return JSON.stringify(a || {}) === JSON.stringify(b || {}); }
+function count(){ return state.cart.reduce(function(s, l){ return s + l.qty; }, 0); }
+function subtotal(){ return state.cart.reduce(function(s, l){ return s + unitPrice(BY_ID[l.id], l.choice) * l.qty; }, 0); }
+function fee(){ var st = subtotal(); if (state.mode !== 'livraison' || st === 0) return 0; return st >= FREE_DELIVERY ? 0 : DELIVERY_FEE; }
+function total(){ return subtotal() + fee(); }
+/* N° d'image : 01–14 = photo principale de chaque plat (ordre de la carte), 01a–01d = vignettes de la fiche plat, 15 = accueil, 16 = la salle */
+function plate(d, label, extra, no){ no = no || d.imgNo; return '<div class="plate' + (extra ? ' ' + extra : '') + '" data-img="' + no + '" style="--food:' + d.food + '" role="img" aria-label="Emplacement photo N°' + no + ' : ' + esc(d.name) + '"><span class="ph-label"><b class="ph-no">N°' + no + '</b><span class="ph-txt"> · ' + esc(label || 'Photo à venir') + '</span></span></div>'; }
+
+var toastEl = document.getElementById('toast'), toastT;
+function toast(msg){ toastEl.textContent = msg; toastEl.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(function(){ toastEl.classList.remove('show'); }, 2200); }
+
+function addToCart(id, choice, qty){
+  var d = BY_ID[id]; choice = choice || defaultChoice(d); qty = qty || 1;
+  var line = state.cart.find(function(l){ return l.id === id && sameChoice(l.choice, choice); });
+  if (line) line.qty += qty; else state.cart.push({id:id, choice:choice, qty:qty});
+  save(); updateBadge(); toast(d.name + ' ajouté au panier');
+}
+function updateBadge(){ var n = count(), b = document.getElementById('cartCount'); b.textContent = n; b.classList.toggle('zero', n === 0); }
+
+/* ---------- Composants ---------- */
+function dishCard(d){
+  return '<article class="dish">' +
+    '<button class="dish-open" data-open="' + d.id + '" aria-label="Voir ' + esc(d.name) + '">' + plate(d) +
+    '<div class="dish-body" style="padding-bottom:4px"><div class="dish-top"><h3>' + esc(d.name) + '</h3><span class="price num">' + eurShort(d.price) + '</span></div><p>' + esc(d.short) + '</p></div></button>' +
+    '<div class="dish-body" style="padding-top:0;flex-grow:0"><div class="dish-foot"><span class="chip">' + esc(d.tag) + '</span>' +
+    '<button class="btn sm" data-add="' + d.id + '">+ Ajouter</button></div></div></article>';
+}
+function flow(cur){
+  var steps = ['Panier', 'Livraison & paiement', 'Suivi'];
+  return '<ol class="flow" aria-label="Étapes de la commande">' + steps.map(function(s, i){
+    var cls = i < cur ? 'done' : (i === cur ? 'cur' : '');
+    return (i ? '<li aria-hidden="true"><span class="bar' + (i <= cur ? ' done' : '') + '"></span></li>' : '') +
+      '<li class="' + cls + '"' + (i === cur ? ' aria-current="step"' : '') + '><span class="dot">' + (i + 1) + '</span>' + s + '</li>';
+  }).join('') + '</ol>';
+}
+function summaryRows(){
+  var st = subtotal(), f = fee();
+  var feeTxt = state.mode === 'livraison' ? (f ? eur(f) : 'Offerte') : 'Retrait sur place';
+  return '<div class="row"><span>Sous-total (' + count() + ' article' + (count() > 1 ? 's' : '') + ')</span><span class="num">' + eur(st) + '</span></div>' +
+    '<div class="row"><span>' + (state.mode === 'livraison' ? 'Livraison' : 'À emporter') + '</span><span class="num">' + feeTxt + '</span></div>' +
+    (state.mode === 'livraison' && f ? '<p class="empty">Livraison offerte dès ' + FREE_DELIVERY + ' € d’achat.</p>' : '') +
+    '<div class="hr"></div><div class="row total"><span>Total TTC</span><span class="num">' + eur(total()) + '</span></div>';
+}
+function modeSeg(){
+  return '<div class="seg" role="group" aria-label="Mode de réception">' +
+    '<button data-mode="livraison" aria-pressed="' + (state.mode === 'livraison') + '">Livraison</button>' +
+    '<button data-mode="emporter" aria-pressed="' + (state.mode === 'emporter') + '">À emporter</button></div>';
+}
+
+/* ---------- Vues ---------- */
+function vHome(){
+  var stars = MENU.filter(function(d){ return d.star; });
+  return '' +
+  '<div class="wrap hero">' +
+    '<div><span class="chip copper">Nouveau · Menu dégustation en 5 temps</span>' +
+    '<h1>La haute cuisine, avec l’Afrique au cœur</h1>' +
+    '<p class="lead">Une cuisine gastronomique de saison, ponctuée de grands classiques africains revisités : ndolé, yassa, mafé… À savourer à table, à emporter ou livrée chez vous.</p>' +
+    '<div class="ctas"><a class="btn" href="#reserver">Réserver une table</a><a class="btn ghost" href="#carte">Commander en ligne</a></div>' +
+    '<div class="facts"><div><b>5 temps</b><span>Menu dégustation du soir</span></div><div><b>De saison</b><span>Carte renouvelée chaque saison</span></div><div><b>30–45 min</b><span>Livraison à domicile</span></div></div></div>' +
+    plate(BY_ID.ndole, 'Accueil · Ndolé de homard bleu', '', '15') +
+  '</div>' +
+  '<section class="alt"><div class="wrap"><div class="sec-head"><div><span class="eyebrow">Trois façons de nous goûter</span><h2>L’expérience Emma Gourmet, à table ou chez vous</h2></div></div>' +
+    '<div class="grid3">' +
+      '<div class="svc"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M7 3v8a2 2 0 0 0 2 2v8M5 3v5M9 3v5M17 3c-2 1.5-3 4-3 7s1 3 3 3v8"/></svg></span><h3>Sur place</h3><p>Une salle intimiste, un service attentionné et le menu dégustation chaque soir.</p><a href="#reserver">Réserver une table →</a></div>' +
+      '<div class="svc"><span class="ic cu" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></span><h3>À emporter</h3><p>Les plats de la carte, dressés avec le même soin, prêts à l’heure choisie.</p><button class="link" data-mode-go="emporter">Commander à emporter →</button></div>' +
+      '<div class="svc"><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="17" r="2.5"/><circle cx="18" cy="17" r="2.5"/><path d="M8.5 17h7M3 12h9l2-5h3l3 6"/></svg></span><h3>Livraison</h3><p>Livré chez vous en 30 à 45 minutes, avec les instructions de finition du chef.</p><button class="link" data-mode-go="livraison">Se faire livrer →</button></div>' +
+    '</div></div></section>' +
+  '<section><div class="wrap"><div class="sec-head"><div><span class="eyebrow">Les signatures du chef</span><h2>L’Afrique revisitée, à la française</h2></div><a href="#carte" style="font-weight:600">Voir toute la carte →</a></div>' +
+    '<div class="dishes">' + stars.map(dishCard).join('') + '</div></div></section>' +
+  '<section class="steps-sec"><div class="wrap steps">' +
+    '<div><h2 style="font-size:clamp(28px,3.4vw,34px)">Commander en 3 étapes</h2><p class="muted" style="margin-top:10px">Simple et rapide, sans création de compte.</p></div>' +
+    '<div class="step"><span class="n">1</span><h3>Choisissez vos plats</h3><p>Composez votre commande à partir de la carte du moment.</p></div>' +
+    '<div class="step"><span class="n">2</span><h3>Livraison ou retrait</h3><p>Indiquez votre adresse ou l’heure de passage.</p></div>' +
+    '<div class="step"><span class="n">3</span><h3>Suivez en direct</h3><p>Suivez la préparation puis le livreur, minute par minute.</p></div>' +
+  '</div></section>';
+}
+
+function vCarte(){
+  var f = state.filter;
+  var FILTERS = [['tout','Tout'],['entrees','Entrées'],['plats','Plats'],['afrique','Afrique revisitée'],['desserts','Desserts'],['boissons','Boissons']];
+  var blocks = CATS.map(function(c){
+    var items = MENU.filter(function(d){ return d.cat === c.id && (f === 'tout' || f === c.id || (f === 'afrique' && d.afr)); });
+    if (!items.length) return '';
+    return '<div class="cat-block"><h2 class="cat-title">' + c.label + '</h2><div class="dishes">' + items.map(dishCard).join('') + '</div></div>';
+  }).join('');
+  return '<div class="wrap page-head"><h1>La carte</h1><p>Une carte courte, renouvelée chaque saison, où les grands classiques africains rencontrent la technique française. Commande en ligne jusqu’à 21h30.</p>' +
+    '<div class="filters" role="group" aria-label="Filtrer la carte">' + FILTERS.map(function(x){ return '<button class="filter" data-filter="' + x[0] + '" aria-pressed="' + (f === x[0]) + '">' + x[1] + '</button>'; }).join('') + '</div></div>' +
+    '<div class="wrap carte-layout"><div>' + blocks +
+      '<div class="cat-block" id="carte-degustation"><div class="tasting"><div><span class="eyebrow">Le soir, sur réservation</span><h3 style="margin-top:6px">Menu dégustation en 5 temps</h3><p class="muted" style="margin-top:6px">Le chef compose un voyage entre saison et Afrique revisitée. [PRIX] € par personne, accord mets et vins en option.</p></div><a class="btn ghost" href="#reserver">Réserver une table</a></div></div>' +
+    '</div><aside class="side">' + miniCart() + '</aside></div>';
+}
+function miniCart(){
+  var lines = state.cart.map(function(l){ var d = BY_ID[l.id];
+    return '<div class="row"><span><b class="num" style="color:var(--copper)">' + l.qty + '×</b> ' + esc(d.name) + '</span><span class="num">' + eur(unitPrice(d, l.choice) * l.qty) + '</span></div>'; }).join('');
+  return '<div class="panel"><h2>Votre commande</h2>' + modeSeg() +
+    (lines || '<p class="empty">Votre panier est vide. Ajoutez un plat pour commencer.</p>') +
+    (state.cart.length ? '<div class="hr"></div>' + summaryRows() + '<a class="btn block" href="#panier">Valider mon panier</a>' : '') +
+    '<p class="empty">' + (state.mode === 'livraison' ? 'Livraison estimée : 30–45 min' : 'Prêt en 20 min environ') + '</p></div>';
+}
+
+function vPlat(id){
+  var d = BY_ID[id]; if (!d) return vCarte();
+  var sel = state.sel, catLabel = (CATS.find(function(c){ return c.id === d.cat; }) || {}).label;
+  var groups = (d.opts || []).map(function(o){
+    return '<div class="opt-group"><span id="og-' + o.key + '">' + o.label + '</span><div class="opts" role="group" aria-labelledby="og-' + o.key + '">' +
+      o.choices.map(function(c, i){ var extra = c[1] ? '+ ' + eur(c[1]) : (o.key === 'piment' ? '' : (i === 0 ? 'Inclus' : ''));
+        return '<button class="opt" data-opt="' + o.key + '" data-i="' + i + '" aria-pressed="' + ((sel[o.key] || 0) === i) + '"><b>' + esc(c[0]) + '</b>' + (extra ? '<small class="num">' + extra + '</small>' : '') + '</button>'; }).join('') +
+      '</div></div>';
+  }).join('');
+  var related = MENU.filter(function(x){ return x.id !== d.id && (x.cat === 'boissons' || x.cat === 'desserts'); }).slice(0, 3);
+  return '<div class="wrap"><nav class="crumbs" aria-label="Fil d’Ariane"><a href="#accueil">Accueil</a><span>/</span><a href="#carte">La carte</a><span>/</span><span>' + catLabel + '</span><span>/</span><span style="color:var(--text)">' + esc(d.name) + '</span></nav>' +
+    '<div class="detail"><div>' + plate(d, d.name) +
+      '<div class="thumbs">' + plate(d, 'Dressage', '', d.imgNo + 'a') + plate(d, 'Détail', '', d.imgNo + 'b') + plate(d, 'Produit', '', d.imgNo + 'c') + plate(d, 'En salle', '', d.imgNo + 'd') + '</div></div>' +
+      '<div class="info"><div style="display:flex;gap:8px;flex-wrap:wrap"><span class="chip">' + esc(d.tag) + '</span>' + (d.afr ? '<span class="chip copper">Afrique revisitée</span>' : '') + '</div>' +
+      '<div><h1>' + esc(d.name) + '</h1><div class="big-price num">' + eur(d.price) + '</div></div>' +
+      '<p class="desc">' + esc(d.desc) + '</p><div class="hr"></div>' + groups +
+      '<p class="muted" style="font-size:13px">Allergènes : ' + esc(d.allergens) + '</p>' +
+      '<div class="add-row"><div class="qty" role="group" aria-label="Quantité"><button data-q="-1" aria-label="Retirer une portion">–</button><span class="num" id="qv">' + state.qty + '</span><button data-q="1" aria-label="Ajouter une portion">+</button></div>' +
+      '<button class="btn" id="addDetail" data-add-detail="' + d.id + '">Ajouter au panier · <span class="num" id="pv">' + eur(unitPrice(d, sel) * state.qty) + '</span></button></div>' +
+      '</div></div></div>' +
+    '<section class="alt" style="padding-block:48px"><div class="wrap"><h2 style="font-size:28px;margin-bottom:20px">Pour accompagner</h2><div class="dishes">' + related.map(dishCard).join('') + '</div></div></section>';
+}
+
+function vPanier(){
+  if (!state.cart.length) return '<div class="wrap page-head">' + flow(0) + '<h1 style="margin-top:22px">Votre panier</h1><p>Votre panier est vide pour le moment.</p><div style="margin-top:20px"><a class="btn" href="#carte">Découvrir la carte</a></div></div><div style="height:80px"></div>';
+  var lines = state.cart.map(function(l, i){ var d = BY_ID[l.id];
+    return '<div class="line">' + plate(d, 'Photo') + '<div><h3>' + esc(d.name) + '</h3><small>' + esc(choiceText(d, l.choice) || d.short) + '</small><button class="link rm" data-rm="' + i + '">Retirer</button></div>' +
+      '<div class="qty" role="group" aria-label="Quantité de ' + esc(d.name) + '"><button data-lq="' + i + '" data-d="-1" aria-label="Retirer un">–</button><span class="num">' + l.qty + '</span><button data-lq="' + i + '" data-d="1" aria-label="Ajouter un">+</button></div>' +
+      '<span class="amt num">' + eur(unitPrice(d, l.choice) * l.qty) + '</span></div>'; }).join('');
+  var drinks = MENU.filter(function(d){ return d.cat === 'boissons'; }).map(function(d){ return '<button class="pill" data-add="' + d.id + '">+ ' + esc(d.name) + '<span class="num">' + eur(d.price) + '</span></button>'; }).join('');
+  return '<div class="wrap page-head">' + flow(0) + '<h1 style="margin-top:22px">Votre panier</h1></div>' +
+    '<div class="wrap two-col"><div class="stack">' + lines +
+      '<div class="upsell"><h3>Une boisson pour accompagner ?</h3><div style="display:flex;gap:10px;flex-wrap:wrap">' + drinks + '</div></div>' +
+      '<a href="#carte" style="font-weight:600">← Continuer mes achats</a></div>' +
+    '<div class="stack"><div class="panel"><h2>Mode de réception</h2>' + modeSeg() + '<p class="empty">' + (state.mode === 'livraison' ? 'Livraison en 30–45 min · offerte dès ' + FREE_DELIVERY + ' €' : 'Retrait au restaurant · prêt en 20 min environ') + '</p></div>' +
+      '<div class="panel"><h2>Total</h2>' + summaryRows() + '<a class="btn block" href="#paiement">Continuer</a></div></div></div>';
+}
+
+function vPaiement(){
+  if (!state.cart.length) { location.hash = 'panier'; return ''; }
+  var liv = state.mode === 'livraison';
+  var slots = ['Dès que possible','19:30','20:00','20:30','21:00'];
+  var recap = state.cart.map(function(l){ var d = BY_ID[l.id]; return '<div class="row"><span>' + l.qty + '× ' + esc(d.name) + '</span><span class="num">' + eur(unitPrice(d, l.choice) * l.qty) + '</span></div>'; }).join('');
+  return '<div class="wrap page-head">' + flow(1) + '<h1 style="margin-top:22px">Livraison & paiement</h1></div>' +
+    '<form class="wrap two-col" id="checkout" novalidate><div class="stack">' +
+      '<div class="panel"><h2>Mode de réception</h2>' + modeSeg() +
+        (liv ? '<label class="field" for="f-adr">Adresse de livraison<input id="f-adr" name="adr" autocomplete="street-address" placeholder="N°, rue, ville" required><span class="err" id="e-adr"></span></label>' : '<p class="note">Retrait au restaurant, [ADRESSE].</p>') +
+        '<label class="field" for="f-slot">' + (liv ? 'Créneau de livraison' : 'Heure de retrait') + '<select id="f-slot" name="slot">' + slots.map(function(s){ return '<option>' + s + '</option>'; }).join('') + '</select></label></div>' +
+      '<div class="panel"><h2>Vos coordonnées</h2><div class="fields">' +
+        '<label class="field" for="f-name">Nom complet<input id="f-name" name="name" autocomplete="name" required><span class="err" id="e-name"></span></label>' +
+        '<label class="field" for="f-tel">Téléphone<input id="f-tel" name="tel" type="tel" autocomplete="tel" required><span class="err" id="e-tel"></span></label></div>' +
+        '<label class="field" for="f-mail">E-mail (pour la confirmation)<input id="f-mail" name="mail" type="email" autocomplete="email"></label>' +
+        (liv ? '<label class="field" for="f-note">Instructions pour le livreur<textarea id="f-note" name="note" placeholder="Digicode, étage…"></textarea></label>' : '') + '</div>' +
+      '<div class="panel"><h2>Paiement</h2><div class="opts" role="group" aria-label="Moyen de paiement">' +
+        ['Carte bancaire','Apple Pay / Google Pay','Titre-restaurant'].map(function(m, i){ return '<button type="button" class="opt" data-pay="' + i + '" aria-pressed="' + (i === 0) + '"><b>' + m + '</b></button>'; }).join('') + '</div>' +
+        '<p class="note">Démo : le module de paiement sécurisé sera branché à la mise en ligne. Aucune donnée bancaire n’est demandée ici.</p></div>' +
+    '</div><div class="stack"><div class="panel"><h2>Récapitulatif</h2>' + recap + '<div class="hr"></div>' + summaryRows() +
+      '<p class="form-error" id="formErr" role="alert"></p><button class="btn block" type="submit">Valider la commande · <span class="num">' + eur(total()) + '</span></button>' +
+      '<a href="#panier" style="font-weight:600;font-size:14px">← Modifier le panier</a></div></div></form>';
+}
+
+var trackTimer = null;
+function vSuivi(){
+  var o = state.order;
+  if (!o) return '<div class="wrap page-head"><h1>Suivi de commande</h1><p>Aucune commande en cours pour le moment.</p><div style="margin-top:20px"><a class="btn" href="#carte">Commander</a></div></div><div style="height:80px"></div>';
+  var liv = o.mode === 'livraison';
+  var labels = liv ? ['Confirmée','En préparation','En route','Livrée'] : ['Confirmée','En préparation','Prête','Récupérée'];
+  var recap = o.lines.map(function(l){ return '<div class="row"><span>' + l.qty + '× ' + esc(l.name) + '</span><span class="num">' + eur(l.amount) + '</span></div>'; }).join('');
+  return '<div class="wrap done-head"><span class="ok" aria-hidden="true"><svg width="32" height="24" viewBox="0 0 34 26" fill="none" stroke="#F4F2EF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13l10 10L31 3"/></svg></span>' +
+    '<h1>Merci ' + esc(o.first) + ', votre commande est confirmée</h1><p class="muted">Commande n° <span class="num">' + o.no + '</span> · passée à ' + o.time + '</p></div>' +
+    '<div class="wrap two-col"><div class="stack"><div class="panel"><h2>Suivi en direct</h2><ol class="track" id="track">' +
+      labels.map(function(l, i){ return '<li data-step="' + i + '"><span class="tl"><span class="d"></span>' + (i < 3 ? '<span class="ln"></span>' : '') + '</span><b>' + l + '</b><small class="num" id="t' + i + '">—</small></li>'; }).join('') + '</ol>' +
+      '<p class="empty">Démo : les étapes avancent automatiquement toutes les quelques secondes.</p></div>' +
+      (liv ? '<div class="map">' + mapSvg() + '<div class="eta"><small>Arrivée estimée</small><b class="num" id="eta">' + o.eta + '</b></div></div>' : '<div class="panel"><h2>Retrait au restaurant</h2><p class="muted">[ADRESSE] · présentez le n° <span class="num">' + o.no + '</span> à l’accueil.</p></div>') +
+    '</div><div class="stack">' +
+      (liv ? '<div class="panel"><h2>Votre livreur</h2><div style="display:flex;gap:14px;align-items:center"><span class="mark" style="width:52px;height:52px;background:var(--btn)" aria-hidden="true">M</span><div><b style="font-family:var(--serif);font-size:19px">Moussa</b><p class="empty">Scooter électrique</p></div></div><p class="empty">Le numéro du livreur s’affichera ici une fois la commande en route.</p></div>' : '') +
+      '<div class="panel"><h2>Votre commande</h2>' + recap + '<div class="hr"></div><div class="row total"><span>Total</span><span class="num">' + eur(o.total) + '</span></div>' + (liv ? '<p class="empty">Livraison : ' + esc(o.adr) + '</p>' : '') + '</div>' +
+      '<a class="btn ghost" href="#accueil">Retour à l’accueil</a></div></div>';
+}
+function mapSvg(){
+  return '<svg viewBox="0 0 808 380" role="img" aria-label="Plan du trajet du livreur jusqu’à chez vous">' +
+    '<rect width="808" height="380" fill="#202428"/>' +
+    '<rect x="40" y="40" width="220" height="120" rx="18" fill="#2C3238"/><rect x="330" y="24" width="160" height="110" rx="14" fill="#262B30"/><rect x="600" y="40" width="170" height="120" rx="14" fill="#262B30"/><rect x="60" y="226" width="180" height="120" rx="14" fill="#262B30"/><rect x="560" y="214" width="200" height="72" rx="18" fill="#2C3238"/>' +
+    '<rect x="0" y="180" width="808" height="18" fill="#3A4048"/><rect x="0" y="300" width="808" height="12" fill="#3A4048"/><rect x="290" y="0" width="18" height="380" fill="#3A4048"/><rect x="520" y="0" width="14" height="380" fill="#3A4048"/>' +
+    '<path d="M150 189 H299 V306 H640" fill="none" stroke="#C98A62" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="14 10"/>' +
+    '<circle cx="150" cy="189" r="13" fill="#3A4149" stroke="#E8E6E3" stroke-width="4"/><circle cx="640" cy="306" r="13" fill="#8A96A3" stroke="#E8E6E3" stroke-width="4"/>' +
+    '<circle id="rider" cx="150" cy="189" r="17" fill="#7E6358" stroke="#E8E6E3" stroke-width="4"/>' +
+    '<g font-family="DM Sans, sans-serif" font-size="13" font-weight="600" fill="#E8E6E3"><rect x="96" y="210" width="108" height="26" rx="13" fill="#2A2F35"/><text x="150" y="227" text-anchor="middle">Emma Gourmet</text><rect x="600" y="328" width="80" height="26" rx="13" fill="#2A2F35"/><text x="640" y="345" text-anchor="middle">Chez vous</text></g></svg>';
+}
+function startTracking(){
+  clearInterval(trackTimer);
+  var o = state.order; if (!o) return;
+  var pts = [[150,189],[225,189],[299,189],[299,250],[299,306],[420,306],[540,306],[640,306]];
+  function paint(){
+    var step = Math.min(3, o.step);
+    document.querySelectorAll('#track li').forEach(function(li, i){ li.classList.toggle('done', i < step || (step === 3 && i === 3)); li.classList.toggle('cur', i === step && step < 3); });
+    for (var i = 0; i <= step; i++) { var t = document.getElementById('t' + i); if (t && o.times[i]) t.textContent = o.times[i]; }
+    var r = document.getElementById('rider');
+    if (r) { var k = step < 2 ? 0 : step === 2 ? Math.min(pts.length - 2, o.tick) : pts.length - 1; r.setAttribute('cx', pts[k][0]); r.setAttribute('cy', pts[k][1]); }
+    var e = document.getElementById('eta'); if (e && step === 3) e.textContent = 'Livrée à ' + o.times[3];
+  }
+  paint();
+  trackTimer = setInterval(function(){
+    if (o.step >= 3) { clearInterval(trackTimer); return; }
+    if (o.step === 2 && o.tick < 6) { o.tick++; paint(); return; }
+    o.step++; o.times[o.step] = clock(o.step * 12); paint();
+  }, 3500);
+}
+function clock(addMin){ var d = new Date(Date.now() + (addMin || 0) * 60000); return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'); }
+
+function vReserver(){
+  var today = new Date(); var iso = today.toISOString().slice(0, 10);
+  var times = ['12:00','12:30','13:00','13:30','19:00','19:30','20:00','20:30','21:00','21:30'];
+  var r = state.resa;
+  return '<div class="wrap page-head"><span class="eyebrow">Sur place</span><h1 style="margin-top:8px">Réserver une table</h1><p>Le menu dégustation est servi le soir, sur réservation. Pour un groupe de plus de 8 personnes, contactez-nous directement.</p></div>' +
+    '<div class="wrap resa">' +
+      (r ? '<div class="confirm" role="status"><span class="eyebrow">Demande enregistrée (démo)</span><h3>Merci ' + esc(r.name) + ' !</h3><p>Table pour ' + r.n + ' le ' + esc(r.date) + ' à ' + esc(r.time) + (r.menu ? ', menu dégustation' : '') + '.</p><p class="muted">Dans la version en ligne, une confirmation sera envoyée par SMS ou e-mail.</p><div><button class="btn ghost sm" id="newResa">Faire une autre réservation</button></div></div>' :
+      '<form class="panel" id="resaForm" novalidate><h2>Votre table</h2><div class="fields">' +
+        '<label class="field" for="r-date">Date<input id="r-date" name="date" type="date" min="' + iso + '" value="' + iso + '" required></label>' +
+        '<label class="field" for="r-time">Heure<select id="r-time" name="time">' + times.map(function(t){ return '<option' + (t === '20:00' ? ' selected' : '') + '>' + t + '</option>'; }).join('') + '</select></label>' +
+        '<label class="field" for="r-n" style="flex-basis:120px">Couverts<select id="r-n" name="n">' + [1,2,3,4,5,6,7,8].map(function(n){ return '<option' + (n === 2 ? ' selected' : '') + '>' + n + '</option>'; }).join('') + '</select></label></div>' +
+        '<label style="display:flex;gap:10px;align-items:center;font-size:15px"><input type="checkbox" id="r-menu" name="menu" style="width:20px;height:20px;accent-color:#7E6358"> Je souhaite le menu dégustation en 5 temps</label>' +
+        '<div class="fields"><label class="field" for="r-name">Nom<input id="r-name" name="name" autocomplete="name" required><span class="err" id="er-name"></span></label>' +
+        '<label class="field" for="r-tel">Téléphone<input id="r-tel" name="tel" type="tel" autocomplete="tel" required><span class="err" id="er-tel"></span></label></div>' +
+        '<label class="field" for="r-note">Allergies, occasion particulière…<textarea id="r-note" name="note"></textarea></label>' +
+        '<button class="btn" type="submit">Envoyer la demande</button></form>') +
+      '<div class="aside"><div class="panel"><h2>Horaires</h2><dl class="hours"><dt>Mardi – samedi</dt><dd>12h–14h · 19h–22h</dd><dt>Dimanche – lundi</dt><dd>Fermé</dd></dl></div>' +
+        '<div class="panel"><h2>Nous trouver</h2><p class="muted">[ADRESSE]<br>[TÉLÉPHONE]</p></div>' +
+        plate(BY_ID.bar, 'La salle', '', '16') + '</div></div>';
+}
+
+/* ---------- Routeur ---------- */
+var app = document.getElementById('app');
+function route(){
+  clearInterval(trackTimer);
+  var h = (location.hash || '#accueil').slice(1), html, nav = h;
+  if (h === 'contact') { document.getElementById('contact').scrollIntoView({behavior:'smooth'}); return; }
+  if (h === 'carte-degustation') { h = 'carte'; }
+  if (h.indexOf('plat-') === 0) { var id = h.slice(5); var d = BY_ID[id]; if (d && state.selFor !== id) { state.sel = defaultChoice(d); state.qty = 1; state.selFor = id; } html = vPlat(id); nav = 'carte'; }
+  else if (h === 'carte') html = vCarte();
+  else if (h === 'panier') html = vPanier();
+  else if (h === 'paiement') html = vPaiement();
+  else if (h === 'suivi') html = vSuivi();
+  else if (h === 'reserver') html = vReserver();
+  else { html = vHome(); nav = 'accueil'; }
+  if (h.indexOf('plat-') !== 0) state.selFor = null;
+  app.innerHTML = html;
+  document.querySelectorAll('[data-nav]').forEach(function(a){ if (a.getAttribute('data-nav') === nav) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+  document.getElementById('mobileNav').classList.remove('open'); document.getElementById('menuToggle').setAttribute('aria-expanded', 'false');
+  if ((location.hash || '') === '#carte-degustation') { var t = document.getElementById('carte-degustation'); if (t) t.scrollIntoView(); } else window.scrollTo(0, 0);
+  if (h === 'suivi') startTracking();
+  updateBadge();
+}
+function rerender(keepScroll){ var y = window.scrollY; route(); if (keepScroll) window.scrollTo(0, y); }
+window.addEventListener('hashchange', route);
+
+/* ---------- Interactions ---------- */
+document.getElementById('menuToggle').addEventListener('click', function(){
+  var m = document.getElementById('mobileNav'), open = !m.classList.contains('open');
+  m.classList.toggle('open', open); this.setAttribute('aria-expanded', String(open));
+});
+document.addEventListener('click', function(e){
+  var t = e.target.closest('button, a'); if (!t) return;
+  var ds = t.dataset;
+  if (ds.open) { location.hash = 'plat-' + ds.open; return; }
+  if (ds.add) { addToCart(ds.add); if (/^#(panier|carte)$/.test(location.hash)) rerender(true); return; }
+  if (ds.filter) { state.filter = ds.filter; rerender(true); return; }
+  if (ds.mode) { state.mode = ds.mode; save(); rerender(true); return; }
+  if (ds.modeGo) { state.mode = ds.modeGo; save(); location.hash = 'carte'; return; }
+  if (ds.opt) { state.sel[ds.opt] = +ds.i; var grp = t.parentNode; grp.querySelectorAll('.opt').forEach(function(b){ b.setAttribute('aria-pressed', String(b === t)); }); refreshDetailPrice(); return; }
+  if (ds.q) { state.qty = Math.max(1, state.qty + (+ds.q)); document.getElementById('qv').textContent = state.qty; refreshDetailPrice(); return; }
+  if (ds.addDetail) { addToCart(ds.addDetail, JSON.parse(JSON.stringify(state.sel)), state.qty); return; }
+  if (ds.lq !== undefined) { var l = state.cart[+ds.lq]; l.qty += (+ds.d); if (l.qty < 1) state.cart.splice(+ds.lq, 1); save(); rerender(true); return; }
+  if (ds.rm !== undefined) { var name = BY_ID[state.cart[+ds.rm].id].name; state.cart.splice(+ds.rm, 1); save(); rerender(true); toast(name + ' retiré du panier'); return; }
+  if (ds.pay !== undefined) { t.parentNode.querySelectorAll('.opt').forEach(function(b){ b.setAttribute('aria-pressed', String(b === t)); }); return; }
+  if (t.id === 'newResa') { state.resa = null; rerender(true); return; }
+});
+function refreshDetailPrice(){
+  var id = (location.hash || '').replace('#plat-', ''), d = BY_ID[id]; if (!d) return;
+  var pv = document.getElementById('pv'); if (pv) pv.textContent = eur(unitPrice(d, state.sel) * state.qty);
+}
+function setErr(id, msg){ var el = document.getElementById(id); if (el) el.textContent = msg || ''; }
+document.addEventListener('submit', function(e){
+  e.preventDefault();
+  var f = e.target;
+  if (f.id === 'checkout') {
+    var ok = true, liv = state.mode === 'livraison';
+    var name = f.elements.namedItem('name').value.trim(), tel = f.tel.value.trim(), adr = liv ? f.adr.value.trim() : '';
+    setErr('e-name', name ? '' : 'Indiquez votre nom.'); if (!name) ok = false;
+    var telOk = tel.replace(/\D/g, '').length >= 9; setErr('e-tel', telOk ? '' : 'Indiquez un numéro de téléphone valide.'); if (!telOk) ok = false;
+    if (liv) { setErr('e-adr', adr ? '' : 'Indiquez l’adresse de livraison.'); if (!adr) ok = false; }
+    document.getElementById('formErr').textContent = ok ? '' : 'Quelques informations manquent : vérifiez les champs signalés.';
+    if (!ok) return;
+    state.order = {
+      no: String(Math.floor(1000 + Math.random() * 9000)), time: clock(0), first: name.split(' ')[0], mode: state.mode, adr: adr,
+      eta: liv ? clock(40) : clock(20), total: total(), step: 0, tick: 0, times: [clock(0)],
+      lines: state.cart.map(function(l){ var d = BY_ID[l.id]; return {name: d.name, qty: l.qty, amount: unitPrice(d, l.choice) * l.qty}; })
+    };
+    state.cart = []; save(); location.hash = 'suivi';
+  }
+  if (f.id === 'resaForm') {
+    var n2 = f.elements.namedItem('name').value.trim(), t2 = f.tel.value.trim(), ok2 = true;
+    setErr('er-name', n2 ? '' : 'Indiquez votre nom.'); if (!n2) ok2 = false;
+    var tOk = t2.replace(/\D/g, '').length >= 9; setErr('er-tel', tOk ? '' : 'Indiquez un numéro de téléphone valide.'); if (!tOk) ok2 = false;
+    if (!ok2) return;
+    var dt = new Date(f.date.value + 'T12:00:00');
+    state.resa = { name: n2, n: f.n.value, time: f.time.value, menu: f.menu.checked, date: isNaN(dt) ? f.date.value : dt.toLocaleDateString('fr-FR', {weekday:'long', day:'numeric', month:'long'}) };
+    rerender(true);
+  }
+});
+
+route();
+})();
+</script>
+</body>
+</html>
